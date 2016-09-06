@@ -1,10 +1,5 @@
 package session1;
 
-import java.util.Arrays;
-
-/**
- * Created by ZaR on 03-Sep-16.
- */
 public class Zoo {
     private Animal [] animalArray = new Animal[10];
     private String zooName;
@@ -26,29 +21,27 @@ public class Zoo {
     }
 
     public void addAnimal(Animal animal){
-        if (animal.getClass()==Cat.class){
-            Cat cat = (Cat)animal;
-            System.out.println("Pretty cat"+cat);
-        }
-        if (animal.getClass()==Dog.class){
-            Dog dog = (Dog)animal;
-            System.out.println("Pretty dog"+ dog);
-        }
-        for(int i=0; i<animalArray.length; i++){
-            if(animalArray[i]==null){
-                animalArray[i]=animal;
-                return;
+        if (isAnimal(animal)){
+            for (int i = 0; i < animalArray.length; i++) {
+                if (animalArray[i] == null) {
+                    animalArray[i] = animal;
+                    return;
+                }
             }
         }
     }
+    private boolean isAnimal(Animal animal){
+        return animal instanceof Cat || animal instanceof Dog;
+    }
+
 
     @Override
     public String toString() {
         String res = "";
-        res += this.zooName + System.lineSeparator() + "///";
+        res += this.zooName + System.lineSeparator() + "///" + System.lineSeparator();
         for (Animal animal: animalArray){
             if (animal != null){
-                res+=animal +System.lineSeparator();
+                res += animal + System.lineSeparator();
             }
         }
         return res;

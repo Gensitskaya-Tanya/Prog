@@ -1,18 +1,6 @@
 package session1;
 
-/**
- * Created by ZaR on 03-Sep-16.
- */
 public class Car {
-    public static void main(String[] args) {
-//        Car carOne = new Car();
-//        carOne.color = "Green";
-//        carOne.year = 1992;
-//        carOne.weight = 0.2;
-//        carOne.weight=0.1;
-        Car carTwo = new Car("red", 0.1, 1234);
-        System.out.println(carTwo.toString());
-    }
 
     private  String color;
     private double weight;

@@ -43,6 +43,6 @@ public class Cat extends Animal {
 
     @Override
     public String toString() {
-        return "Cat" + "name='" + name + '\'' +                ", type='" + type +"  "+ super.toString();
+        return "Cat name= " + name + ", type= " + type + "  "+ super.toString();
     }
 }

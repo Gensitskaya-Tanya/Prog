@@ -18,12 +18,12 @@ public class Animal {
         this.racion = racion;
     }
 
-    public void getVoice(){
+    protected void getVoice(){
+        System.out.println("Animal");
+    }
 
-    }
-    public String getColor() {
-        return color;
-    }
+
+    public String getColor() {return color;    }
 
     public void setColor(String color) {
         this.color = color;
@@ -47,8 +47,6 @@ public class Animal {
 
     @Override
     public String toString() {
-        return   "color='" + color + '\'' +
-                ", age=" + age +
-                ", racion='" + racion + '\'';
+        return   "color= " + color + " " + ", age= " + age + ", racion= " + racion + " ";
     }
 }

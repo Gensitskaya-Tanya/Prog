@@ -30,8 +30,6 @@ public class Dog extends  Animal {
 
     @Override
     public String toString() {
-        return "Dog{" +
-                "type='" + type + '\'' + super.toString()+
-                '}';
+        return "Dog type= " + type + ", " + super.toString();
     }
 }
