@@ -1,11 +1,11 @@
-package session1;
+package session1.sources;
 
 public class Car {
 
-    private  String color;
+    private String color;
     private double weight;
     private int year;
-    private double velosity = 0;
+    private double velocity = 0;
 
     public Car() {
     }
@@ -16,19 +16,26 @@ public class Car {
         this.year = year;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Car{" +
+                "color='" + color + '\'' +
+                ", weight=" + weight +
+                ", year=" + year +
+                ", velocity=" + velocity +
+                '}';
+    }
 
     void beep() {
         System.out.println("BEEP-BEEP!!!");
     }
 
     void acceleration(double a) {
-        velosity = velosity + a;
+        velocity = velocity + a;
     }
 
     void deceleration(double b) {
-        if (velosity - b >= 0) velosity = velosity - b;
+        if (velocity - b >= 0) velocity = velocity - b;
     }
 
 
@@ -44,8 +51,8 @@ public class Car {
         this.year = year;
     }
 
-    public void setVelosity(double velosity) {
-        this.velosity = velosity;
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
     }
 
 
@@ -61,18 +68,8 @@ public class Car {
         return year;
     }
 
-    public double getVelosity() {
-        return velosity;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "color='" + color + '\'' +
-                ", weight=" + weight +
-                ", year=" + year +
-                ", velosity=" + velosity +
-                '}';
+    public double getVelocity() {
+        return velocity;
     }
 
 }

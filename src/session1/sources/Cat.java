@@ -1,17 +1,9 @@
-package session1;
+package session1.sources;
 
-/**
- * Created by ZaR on 03-Sep-16.
- */
 public class Cat extends Animal {
+
     private String name;
     private String type;
-
-    public Cat() {
-        super();
-    }
-
-
 
     public Cat(String color, int age, String racion, String name, String type) {
         super(color, age, racion);
@@ -19,6 +11,10 @@ public class Cat extends Animal {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Cat name= " + name + ", type= " + type + "  "+ super.toString();
+    }
 
     public String getName() {
         return name;
@@ -41,8 +37,4 @@ public class Cat extends Animal {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Cat name= " + name + ", type= " + type + "  "+ super.toString();
-    }
 }

@@ -1,18 +1,16 @@
-package session1;
+package session1.sources;
 
-/**
- * Created by ZaR on 03-Sep-16.
- */
-public class Dog extends  Animal {
+public class Dog extends Animal {
     private String type;
-
-    public Dog() {
-
-    }
 
     public Dog(String color, int age, String racion, String type) {
         super(color, age, racion);
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog type= " + type + ", " + super.toString();
     }
 
     @Override
@@ -28,8 +26,4 @@ public class Dog extends  Animal {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Dog type= " + type + ", " + super.toString();
-    }
 }
