@@ -1,7 +1,9 @@
 package hw2;
 
 
-public class Student extends Human {
+import java.io.Serializable;
+
+public class Student extends Human implements Serializable {
 	private String university;
 	private int course;
 	private String group;

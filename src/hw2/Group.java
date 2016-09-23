@@ -1,17 +1,30 @@
 package hw2;
 
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Group implements Voenkom {
+public class Group implements Voenkom, Serializable {
 	private int maxSumStudents = 10;
 	private Scanner scan = new Scanner(System.in);
-
 	private Student[] students = new Student[maxSumStudents];
 
 	public Group() {
+	}
+
+	public boolean saveGroupToFile(Group group, String FilePath) {
+		try (FileOutputStream fos = new FileOutputStream(FilePath);
+			 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(group);
+			oos.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	public boolean addStudent(Student student) throws StudentIndexOutOfBoundsException {
@@ -42,39 +55,25 @@ public class Group implements Voenkom {
 				students[i] = null;
 			}
 		}
-
 	}
 
 	public boolean findStudentByLastName(String lastName) {
-		for (int i = 0; i < students.length; i++) {
-			if (null == students[i]) {
+		for (Student student : students) {
+			if (null == student) {
 				continue;
 			}
-			if (students[i].getLastName().equals(lastName)) {
+			if (student.getLastName().equals(lastName)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Student[] getStudentsInArray() {
-		return students;
-	}
-
-
-	public int getMaxSumStudents() {
-		return maxSumStudents;
-	}
-
-	public void setMaxSumStudents(int maxSumStudents) {
-		this.maxSumStudents = maxSumStudents;
-	}
-
 	public void sortStudentByLastName() {
 		shiftNULLtoTheEndInArray();
 		for (int i = students.length - 1; i > 0; i--) {
 			for (int j = 0; j < i; j++) {
-				if(students[j]!=null && students[j+1]!=null){
+				if (students[j] != null && students[j + 1] != null) {
 					if (students[j].getLastName().compareTo(students[j + 1].getLastName()) > 0) {
 						Student tmp = students[j];
 						students[j] = students[j + 1];
@@ -85,21 +84,23 @@ public class Group implements Voenkom {
 			}
 		}
 	}
-	public void  shiftNULLtoTheEndInArray(){
-		for (int i = 0; i <students.length ; i++) {
-			 if(null==students[i]){
-				 for (int j =students.length-1; j>i; j--) {
-					if(students[j]!=null){
+
+	private void shiftNULLtoTheEndInArray() {
+		for (int i = 0; i < students.length; i++) {
+			if (null == students[i]) {
+				for (int j = students.length - 1; j > i; j--) {
+					if (students[j] != null) {
 						Student temp = students[j];
-						students[j]= students[i];
+						students[j] = students[i];
 						students[i] = temp;
 						break;
 					}
-				 }
-			 }
+				}
+			}
 		}
 	}
-	public void sortStudentByFirstName(){
+
+	public void sortStudentByFirstName() {
 		shiftNULLtoTheEndInArray();
 		Arrays.sort(students, new Comparator<Student>() {
 			@Override
@@ -108,12 +109,11 @@ public class Group implements Voenkom {
 					return o1.getFirstName().compareTo(o2.getFirstName());
 				}
 				return 0;
-
 			}
 		});
 	}
 
-	public void sortStudentByAge(){
+	public void sortStudentByAge() {
 		shiftNULLtoTheEndInArray();
 		Arrays.sort(students, new Comparator<Student>() {
 			@Override
@@ -127,8 +127,9 @@ public class Group implements Voenkom {
 			}
 		});
 	}
-	public void sortStudentByParametr123(int parametr){
-		switch (parametr){
+
+	public void sortStudentByParametr123(int parametr) {
+		switch (parametr) {
 			case 1:
 				sortStudentByLastName();
 				break;
@@ -142,39 +143,6 @@ public class Group implements Voenkom {
 				break;
 
 		}
-	}
-	@Override
-	public String toString() {
-		Arrays.sort(students, new Comparator<Student>() {
-			@Override
-			public int compare(Student o1, Student o2) {
-				if (o1 != null && o2 != null) {
-					return o1.getLastName().compareTo(o2.getLastName());
-				}
-				return 0;
-			}
-		});
-		StringBuilder sb = new StringBuilder();
-		for (Student student : students) {
-			if (null == student) {
-				sb.append("null " + "\n");
-				continue;
-			}
-			sb.append(student.toString() + "\n");
-		}
-		return sb.toString();
-	}
-
-	public void printStudent(){
-		StringBuilder sb = new StringBuilder();
-		for (Student student : students) {
-			if (null == student) {
-				sb.append("null " + "\n");
-				continue;
-			}
-			sb.append(student.toString() + "\n");
-		}
-		System.out.println(sb.toString());
 	}
 
 	public boolean addStudentInteractive() {
@@ -234,24 +202,57 @@ public class Group implements Voenkom {
 
 	@Override
 	public Student[] getStudentAgeAfter18() {
-		int countStudAfter18 =0;
-		for (int i = 0; i < students.length; i++) {
-			 if(students[i]!=null && students[i].getAge()>18){
-				 countStudAfter18++;
-			 }
+		int countStudAfter18 = 0;
+		for (Student student : students) {
+			if (student != null && student.getAge() > 18) {
+				countStudAfter18++;
+			}
 		}
-		Student [] arrayAfter18 = new Student[countStudAfter18];
-		for (int i = 0; i < students.length; i++) {
-			if(students[i]!=null && students[i].getAge()>18){
-				for (int j = 0; j <arrayAfter18.length ; j++) {
-					if(null == arrayAfter18[j]){
-						arrayAfter18[j]=students[i];
+		Student[] arrayAfter18 = new Student[countStudAfter18];
+		for (Student student : students) {
+			if (student != null && student.getAge() > 18) {
+				for (int j = 0; j < arrayAfter18.length; j++) {
+					if (null == arrayAfter18[j]) {
+						arrayAfter18[j] = student;
 						break;
 					}
-
 				}
 			}
 		}
 		return arrayAfter18;
+	}
+
+	public void printStudent() {
+		StringBuilder sb = new StringBuilder();
+		for (Student student : students) {
+			if (null == student) {
+				sb.append("null " + "\n");
+				continue;
+			}
+			sb.append(student.toString() + "\n");
+		}
+		System.out.println(sb.toString());
+	}
+
+	@Override
+	public String toString() {
+		Arrays.sort(students, new Comparator<Student>() {
+			@Override
+			public int compare(Student o1, Student o2) {
+				if (o1 != null && o2 != null) {
+					return o1.getLastName().compareTo(o2.getLastName());
+				}
+				return 0;
+			}
+		});
+		StringBuilder sb = new StringBuilder();
+		for (Student student : students) {
+			if (null == student) {
+				sb.append("null " + "\n");
+				continue;
+			}
+			sb.append(student.toString() + "\n");
+		}
+		return sb.toString();
 	}
 }
