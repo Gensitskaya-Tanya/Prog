@@ -1,6 +1,10 @@
 package hw3.retainerTwoFile;
 
-
+/**
+ * 2. Напишите программу которая примет на вход 2 текстовых
+ файла,  а  вернет  один.  Содержимым  этого  файла  должны
+ быть слова которые есть и в первом и во втором файле.
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;

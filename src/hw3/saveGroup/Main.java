@@ -1,6 +1,12 @@
 package hw3.saveGroup;
 
+/**
+ * 3.  Усовершенствуйте  класс  описывающий  группу  студентов
+ добавив возможность сохранения группы в файл.
 
+ 4.  Реализовать  обратный  процесс  —  т.е.  считать  данные  о
+ группе из файла и на их основе создать объект типа группа.
+ */
 import hw2.Student;
 import hw2.StudentIndexOutOfBoundsException;
 
@@ -10,10 +16,6 @@ public class Main {
 		testWriteGroupToFile("F:\\_Prog\\Prog\\src\\hw3\\saveGroup\\group.txt");
 		testReadGroupFromFile("F:\\_Prog\\Prog\\src\\hw3\\saveGroup\\group.txt");
 	}
-
-
-
-
 
 
 	public static void testWriteGroupToFile(String filePath) {

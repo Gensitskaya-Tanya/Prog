@@ -1,5 +1,9 @@
 package hw3.copyFilesFromCatalog;
-
+/**
+ * 1. Напишите программу которая скопирует файлы (с заранее
+ определенным  расширением  —  например  только  doc)  из
+ каталога источника в каталог приемник.
+ */
 import java.io.File;
 import java.io.FileFilter;
 

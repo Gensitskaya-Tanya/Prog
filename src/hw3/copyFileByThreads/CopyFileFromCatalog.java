@@ -1,9 +1,8 @@
-package hw3.copyFilesFromCatalog;
+package hw3.copyFileByThreads;
 
 /**
- * 1. Напишите программу которая скопирует файлы (с заранее
- определенным  расширением  —  например  только  doc)  из
- каталога источника в каталог приемник.
+ * Реализуйте многопоточное копирование каталога,
+ содержащего несколько файлов.
  */
 import java.io.*;
 
@@ -24,26 +23,28 @@ public class CopyFileFromCatalog {
 		this.fileNamesArray = file.list();
 	}
 
-	public CopyFileFromCatalog(String inputPath, String outputPath, String[] pathname) {
-		this.inputPath = inputPath;
-		this.outputPath = outputPath;
-		useMyFileFilter(pathname);
+
+	public void copyFilesFromCatalogByThread() {
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				copyFilesFromCatalog(0, fileNamesArray.length/2);
+			}
+		});
+		Thread thread2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				copyFilesFromCatalog(fileNamesArray.length/2, fileNamesArray.length);
+			}
+		});
+		thread1.start();
+		thread2.start();
 	}
 
-	private void useMyFileFilter(String[] pathname) {
-		this.file = new File(inputPath);
-		FileFilter mFF = new MyFileFilter(pathname);
-		File[] fileList = file.listFiles(mFF);
-		this.fileNamesArray = new String[fileList.length];
-		for (int i = 0; i < fileNamesArray.length; i++) {
-			fileNamesArray[i] = fileList[i].getName();
-		}
-	}
-
-	public boolean copyTextToNewFiles() {
-		for (String filename : fileNamesArray) {
-			try (InputStream is = new FileInputStream(new File(inputPath + filename));
-				 OutputStream os = new FileOutputStream(new File(outputPath + filename))) {
+	private void  copyFilesFromCatalog(int firstIndexArray, int nextIndexArray){
+		for (int i = firstIndexArray; i <nextIndexArray; i++) {
+			try (InputStream is = new FileInputStream(new File(inputPath + fileNamesArray[i]));
+				 OutputStream os = new FileOutputStream(new File(outputPath + fileNamesArray[i]))) {
 				byte[] buffer = new byte[1024];
 				int length;
 				while ((length = is.read(buffer)) > 0) {
@@ -51,10 +52,8 @@ public class CopyFileFromCatalog {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				return false;
 			}
 		}
-		return true;
 	}
 
 	public String getInputPath() {
