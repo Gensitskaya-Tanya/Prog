@@ -1,4 +1,4 @@
-package hw3;
+package hw3.copyFilesFromCatalog;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -7,8 +7,8 @@ import java.io.FileFilter;
 public class MyFileFilter implements FileFilter {
 	private String[] arrPathNameOfFile;
 
-	public MyFileFilter(String[] arr) {     //{"docx", "pdf", "jpg"}
-		this.arrPathNameOfFile = arr;
+	public MyFileFilter(String[] pathNameArr) {     //{"docx", "pdf", "jpg"}
+		this.arrPathNameOfFile = pathNameArr;
 	}
 
 	private boolean checkPathNameOfFileInArr(String pathname) {
