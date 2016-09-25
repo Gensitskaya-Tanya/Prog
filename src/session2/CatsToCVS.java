@@ -24,7 +24,8 @@ public class CatsToCVS implements DAOCats {
 
     @Override
     public void saveCat(Cat cat) {
-       try(PrintWriter pw = new PrintWriter(file)) {
+       try {
+           PrintWriter pw = new PrintWriter(file);
            pw.println(cat.getName() + ";" +cat.getColor() + ";" + cat.getAge() + ";" + cat.getType());
        } catch (IOException e) {
            e.printStackTrace();
@@ -33,7 +34,8 @@ public class CatsToCVS implements DAOCats {
 
     @Override
     public Cat loadCat() {
-    try(BufferedReader br = new BufferedReader(new FileReader(file))){
+    try{
+        BufferedReader br = new BufferedReader(new FileReader(file));
         String catsText = br.readLine();
         String [] catsDate = catsText.split(";");
         String name = catsDate[0];

@@ -1,5 +1,15 @@
-package hw2;
+package hw3.saveGroup;
 
+/**
+ * 3.  Усовершенствуйте  класс  описывающий  группу  студентов
+ добавив возможность сохранения группы в файл.
+
+ 4.  Реализовать  обратный  процесс  —  т.е.  считать  данные  о
+ группе из файла и на их основе создать объект типа группа.
+ */
+import hw2.Student;
+import hw2.StudentIndexOutOfBoundsException;
+import hw2.Voenkom;
 
 import java.io.*;
 import java.util.Arrays;
@@ -7,8 +17,9 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class Group implements Voenkom, Serializable {
-	private int maxSumStudents = 10;
-	private Scanner scan = new Scanner(System.in);
+	private static final long serialVersionUID = -6353359394329125235L;
+	private transient int maxSumStudents = 10;
+	private transient Scanner scan = new Scanner(System.in);
 	private Student[] students = new Student[maxSumStudents];
 
 	public Group() {
@@ -25,6 +36,18 @@ public class Group implements Voenkom, Serializable {
 			e.printStackTrace();
 		}
 		return true;
+	}
+
+	public Group readGroupFromFile(String filePath) {
+		Group group = null;
+		try (FileInputStream fis = new FileInputStream(filePath);
+			 ObjectInputStream oin = new ObjectInputStream(fis)) {
+			group = (Group) oin.readObject();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("serialVersionUID= " + serialVersionUID);
+		return group;
 	}
 
 	public boolean addStudent(Student student) throws StudentIndexOutOfBoundsException {
