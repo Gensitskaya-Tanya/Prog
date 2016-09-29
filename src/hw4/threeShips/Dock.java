@@ -1,78 +1,38 @@
 package hw4.threeShips;
 
 
-public class Dock {
-	private Stok stok = new Stok();
-	private WaterArea waterArea = new WaterArea(3);
+public class Dock implements Runnable {
+
+	private Stock stok;
+	private WaterArea waterArea;
 
 	public Dock() {
 	}
 
-	public void startWorkingDock() {
-		Thread thread1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				reloadShip();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		Thread thread2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				reloadShip();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread1.setName("thread 1");
-		thread2.setName("thread 2");
-		thread1.start();
-		thread2.start();
-		try {
-			thread1.join();
-			thread2.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public Dock(Stock stok, WaterArea waterArea) {
+		this.stok = stok;
+		this.waterArea = waterArea;
 	}
 
-	private void reloadShip() {
-		while (waterArea.isStatusOfLoadShipOnWaterArea()) {
+
+	@Override
+	public void run() {
+		while (waterArea.isLadenShipExist()) {
 			Ship ship = waterArea.getShip();
 			int count = 1;
-			while (ship.isStatusOfLoad()) {
-				Integer box = ship.deleteOneBoxFromShip();
-				if (box == 1){
+			while (ship != null && ship.isStatusOfLoad()) {
+
+				if (ship.deleteOneBoxFromShip()) {
 					System.out.println(Thread.currentThread() + "count box delete " + count);
-					stok.addBoxToStok(box);
+					stok.addBoxToStok(1);
 //					System.out.println(Thread.currentThread() + "count box add      " + count);
 					count++;
 				}
 
 			}
+			waterArea.addShipToWaterArea(ship);
 		}
 	}
 
-	public Stok getStok() {
-		return stok;
-	}
 
-	public void setStok(Stok stok) {
-		this.stok = stok;
-	}
-
-	public WaterArea getWaterArea() {
-		return waterArea;
-	}
-
-	public void setWaterArea(WaterArea waterArea) {
-		this.waterArea = waterArea;
-	}
 }

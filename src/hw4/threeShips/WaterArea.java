@@ -4,70 +4,55 @@ import java.util.ArrayList;
 
 
 public class WaterArea {
-	private int numbership;
-	private ArrayList<Ship> shiplist  = new ArrayList<>();
+	private ArrayList<Ship> shipList = new ArrayList<>();
 	private boolean statusOfLoadShipOnWaterArea = true;
 
 
-	public WaterArea(int numbership) {
-		this.numbership = numbership;
-		generateShip();
+	public WaterArea(int numberShip) {
+		generateShip(numberShip);
 	}
 
 	public boolean deleteShipFromWaterArea() {
-		if (shiplist.size() > 0) {
-			shiplist.remove(0);
-			checkBoxInShipOnWaterArea();
+		if (shipList.size() > 0) {
+			shipList.remove(0);
 			return true;
 		}
 		return false;
 	}
 
 	public void addShipToWaterArea(Ship ship) {
-		this.shiplist.add(ship);
+		this.shipList.add(ship);
 	}
 
-	private boolean checkBoxInShipOnWaterArea() {
-		for (int i = 0; i < shiplist.size(); i++) {
-			if (shiplist.get(i).isStatusOfLoad() == true) {
-				statusOfLoadShipOnWaterArea = true;
+	public boolean isLadenShipExist() {
+		for (Ship aShipList : shipList) {
+			if (aShipList.isStatusOfLoad()) {
 				return true;
 			}
 		}
-		statusOfLoadShipOnWaterArea = false;
 		return false;
 
 	}
 
-	private void generateShip() {
-		for (int i = 0; i < numbership; i++) {
-			shiplist.add(new Ship(i + ""));
+	private void generateShip(int numberShip) {
+		for (int i = 0; i < numberShip; i++) {
+			shipList.add(new Ship(i + ""));
 		}
 	}
 
-	public int getNumbership() {
-		return numbership;
-	}
-
-	public void setNumbership(int numbership) {
-		this.numbership = numbership;
-	}
 
 	public Ship getShip() {
-		Ship ship = shiplist.get(0);
-		deleteShipFromWaterArea();
-		return ship;
+		if(shipList.size()>0) {
+			Ship ship = shipList.get(0);
+			deleteShipFromWaterArea();
+			return ship;
+		}
+		return null;
 	}
 
 	public void setShip(ArrayList<Ship> shiplist) {
-		this.shiplist = shiplist;
+		this.shipList = shiplist;
 	}
 
-	public boolean isStatusOfLoadShipOnWaterArea() {
-		return statusOfLoadShipOnWaterArea;
-	}
 
-	public void setStatusOfLoadShipOnWaterArea(boolean statusOfLoadShipOnWaterArea) {
-		this.statusOfLoadShipOnWaterArea = statusOfLoadShipOnWaterArea;
-	}
 }

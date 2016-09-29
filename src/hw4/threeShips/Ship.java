@@ -19,18 +19,18 @@ public class Ship {
 
 
 
-	private final void addBoxToShip() {
+	private void addBoxToShip() {
 		for (int i = 0; i < 10; i++) {
 			numberBox.add(i);
 		}
 	}
-	public  Integer deleteOneBoxFromShip(){
+	public  boolean deleteOneBoxFromShip(){
 		if(numberBox.size()>0){
 			numberBox.remove(0);
-			return 1;
+			return true;
 		}
 		statusOfLoad = false;
-		return 0;
+		return false;
 	}
 
 	public String getName() {
