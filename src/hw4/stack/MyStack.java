@@ -88,4 +88,7 @@ public class MyStack {
 		return objectArray;
 	}
 
+	public BlackList getBlackList() {
+		return blackList;
+	}
 }
