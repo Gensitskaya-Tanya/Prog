@@ -31,6 +31,7 @@ public class Main {
 
 		BlackList blackList = new BlackList();
 		blackList.add(cat);
+
 		MyStack stack = new MyStack(blackList);
 
 
@@ -49,6 +50,7 @@ public class Main {
 
 		stack.printObjectArray();
 		System.out.println("------------------");
+
 		stack.getObjectWithRemove(student1);
 		stack.printObjectArray();
 
