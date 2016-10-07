@@ -1,4 +1,4 @@
-package hw4.threeShips;
+package hw4.three_ships;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Ship {
 	private String name;
 	private ArrayList<Integer> numberBox = new ArrayList<>();
-	private boolean statusOfLoad =true;
+	private boolean statusOfLoad = true;
 
 	public Ship() {
 	}
@@ -15,9 +15,6 @@ public class Ship {
 		this.name = name;
 		addBoxToShip();
 	}
-
-
-
 
 	private void addBoxToShip() {
 		for (int i = 0; i < 10; i++) {

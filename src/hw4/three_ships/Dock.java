@@ -1,4 +1,4 @@
-package hw4.threeShips;
+package hw4.three_ships;
 
 
 public class Dock implements Runnable {
@@ -14,19 +14,19 @@ public class Dock implements Runnable {
 		this.waterArea = waterArea;
 	}
 
-
 	@Override
 	public void run() {
 		while (waterArea.isLadenShipExist()) {
 			Ship ship = waterArea.getShip();
-			int count = 1;
 			while (ship != null && ship.isStatusOfLoad()) {
-
 				if (ship.deleteOneBoxFromShip()) {
-					System.out.println(Thread.currentThread() + "count box delete " + count);
+					System.out.println(Thread.currentThread().getName() + " oneBoxDelete!!! sizeBoxesInShip: " + ship.getNumberBox().size());
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					stok.addBoxToStok(1);
-//					System.out.println(Thread.currentThread() + "count box add      " + count);
-					count++;
 				}
 
 			}

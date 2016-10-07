@@ -1,37 +1,34 @@
-package hw4.multiThreadedFileCopy;
+package hw4.multiThreaded_FileCopy;
+
+import java.util.Arrays;
 
 /**
 
  */
-public class Action1 {
+public class Monitor {
 	private byte[] buffer;
-	private  int length;
+	private int length;
 	private boolean turn = false;
 	private boolean stop = false;
 
-
-
-
-
-
-
 	public synchronized byte[] getBuffer() {
-		while (!turn){
+		if (!turn) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		byte[] temp = buffer;
+		byte[] temp = Arrays.copyOf(buffer, length);
+		buffer = null;
 		turn = false;
-		System.out.println("getBuffer()");
+//		System.out.println("getBuffer()");
 		notifyAll();
 		return temp;
 	}
 
 	public synchronized void setBuffer(byte[] buffer, int length) {
-		while (turn){
+		if (turn) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -42,7 +39,7 @@ public class Action1 {
 		this.buffer = buffer;
 		this.length = length;
 		turn = true;
-		System.out.println("setBuffer");
+//		System.out.println("setBuffer");
 		notifyAll();
 	}
 
@@ -62,5 +59,7 @@ public class Action1 {
 		return length;
 	}
 
-
+	public boolean isBufferNotNull() {
+		return buffer != null;
+	}
 }

@@ -1,4 +1,4 @@
-package hw4.synchronizedNumber;
+package session4.synchronizedNumber;
 
 /**
  * Created by Tanya on 28.09.2016.
@@ -41,5 +41,9 @@ public class Action {
 	}
 	public void setStop(boolean stop) {
 		this.stop = stop;
+	}
+
+	public boolean isTurn() {
+		return turn;
 	}
 }

@@ -1,10 +1,10 @@
-package hw4.threeShips;
+package hw4.three_ships;
 
 
 import java.util.ArrayList;
 
 public class Stock {
-	ArrayList<Integer> stokOfBoxes = new ArrayList<>();
+	private ArrayList<Integer> stokOfBoxes = new ArrayList<>();
 
 	public Stock() {
 	}

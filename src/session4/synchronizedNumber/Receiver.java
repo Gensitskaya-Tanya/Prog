@@ -1,4 +1,4 @@
-package hw4.synchronizedNumber;
+package session4.synchronizedNumber;
 
 /**
  * Created by Tanya on 28.09.2016.
@@ -6,7 +6,6 @@ package hw4.synchronizedNumber;
 public class Receiver implements Runnable {
 	private Action action;
 	public Receiver(Action action) {
-		super();
 		this.action = action;
 	}
 	@Override

@@ -1,11 +1,10 @@
-package hw4.threeShips;
+package hw4.three_ships;
 
 import java.util.ArrayList;
 
 
 public class WaterArea {
 	private ArrayList<Ship> shipList = new ArrayList<>();
-	private boolean statusOfLoadShipOnWaterArea = true;
 
 
 	public WaterArea(int numberShip) {
@@ -41,7 +40,7 @@ public class WaterArea {
 	}
 
 
-	public Ship getShip() {
+	public synchronized Ship getShip() {
 		if(shipList.size()>0) {
 			Ship ship = shipList.get(0);
 			deleteShipFromWaterArea();
