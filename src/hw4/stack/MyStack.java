@@ -2,7 +2,22 @@ package hw4.stack;
 
 public class MyStack {
 	private Object[] objectArray = new Object[2];
+	private BlackList blackList;
 
+	public MyStack() {
+	}
+
+	public MyStack(BlackList blackList) {
+		this.blackList = blackList;
+	}
+
+	public void addWithCheckInBlackList(Object obj) {
+		if (blackList.checkObjectInBlackList(obj)) {
+			System.out.println("!!! the addition _"+ obj.getClass() + "_ is impossible !!!");
+		} else {
+			add(obj);
+		}
+	}
 
 	public void add(Object obj) {
 		for (int i = 0; i < objectArray.length; i++) {
@@ -15,7 +30,7 @@ public class MyStack {
 		add(obj);
 	}
 
-	public void rebuildArray() {
+	private void rebuildArray() {
 		int coefficient = 2;
 		Object[] newArray = new Object[objectArray.length * coefficient];
 		System.arraycopy(objectArray, 0, newArray, 0, objectArray.length);
@@ -25,7 +40,7 @@ public class MyStack {
 
 	public Object getObject(Object obj) {
 		for (Object e : objectArray) {
-			if (e.getClass() == obj.getClass()) {
+			if (e.equals(obj)) {
 				return e;
 			}
 		}
@@ -33,18 +48,21 @@ public class MyStack {
 	}
 
 	public Object getObjectFromTopStack() {
-		for (int i = 0; i < objectArray.length; i++) {
-			if (objectArray[i] == null) {
-				System.out.println(objectArray[i - 1]);
-				return objectArray[i];
+		if (objectArray[0] != null) {
+			for (int i = 0; i < objectArray.length; i++) {
+				if (objectArray[i] == null) {
+					System.out.println(objectArray[i - 1]);
+					return objectArray[i - 1];
+				}
 			}
+			return objectArray[objectArray.length - 1];
 		}
 		return null;
 	}
 
 	public Object getObjectWithRemove(Object obj) {
 		for (int i = 0; i < objectArray.length; i++) {
-			if (objectArray[i].getClass() == obj.getClass()) {
+			if (objectArray[i].equals(obj)) {
 				Object temp = objectArray[i];
 				removeObject(i);
 				return temp;
