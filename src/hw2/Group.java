@@ -1,12 +1,18 @@
 package hw2;
 
-
+/**
+ * 1) Используя  стандартный  методы  сериализации  создайте  мини  базу
+ данных  для  работы  с  группами  студентов  (возможность  записи  и  чтения
+ базы из файла по запросу пользователя).
+ */
 import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
 public class Group implements Voenkom, Serializable {
+
+	private static final long serialVersionUID = -3143321002070603154L;
 	private int maxSumStudents = 10;
 	private Scanner scan = new Scanner(System.in);
 	private Student[] students = new Student[maxSumStudents];
@@ -26,6 +32,19 @@ public class Group implements Voenkom, Serializable {
 		}
 		return true;
 	}
+
+	public Group readGroupFromFile(String filePath) {
+		Group group = null;
+		try (FileInputStream fis = new FileInputStream(filePath);
+			 ObjectInputStream oin = new ObjectInputStream(fis)) {
+			group = (Group) oin.readObject();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("serialVersionUID= " + serialVersionUID);
+		return group;
+	}
+
 
 	public boolean addStudent(Student student) throws StudentIndexOutOfBoundsException {
 		if (getRealCountStudent() + 1 > maxSumStudents) throw new StudentIndexOutOfBoundsException();

@@ -21,7 +21,7 @@ public class Human {
 
 	@Override
 	public String toString() {
-		return 	"lastName= " + lastName  +
+		return 	"Human: " + "lastName= " + lastName  +
 				", firstName= " + firstName +
 				", age= " + age +
 				", weight=" + weight +
