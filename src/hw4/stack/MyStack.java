@@ -4,7 +4,6 @@ public class MyStack {
 	private Object[] objectArray = new Object[2];
 
 
-
 	public void add(Object obj) {
 		for (int i = 0; i < objectArray.length; i++) {
 			if (objectArray[i] == null) {
@@ -13,7 +12,7 @@ public class MyStack {
 			}
 		}
 		rebuildArray();
-		this.add(obj);
+		add(obj);
 	}
 
 	public void rebuildArray() {
@@ -40,7 +39,7 @@ public class MyStack {
 				return objectArray[i];
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public Object getObjectWithRemove(Object obj) {
