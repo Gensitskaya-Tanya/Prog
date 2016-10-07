@@ -1,0 +1,74 @@
+package hw4.stack;
+
+public class MyStack {
+	private Object[] objectArray = new Object[2];
+
+
+
+	public void add(Object obj) {
+		for (int i = 0; i < objectArray.length; i++) {
+			if (objectArray[i] == null) {
+				objectArray[i] = obj;
+				return;
+			}
+		}
+		rebuildArray();
+		this.add(obj);
+	}
+
+	public void rebuildArray() {
+		int coefficient = 2;
+		Object[] newArray = new Object[objectArray.length * coefficient];
+		System.arraycopy(objectArray, 0, newArray, 0, objectArray.length);
+		objectArray = newArray;
+	}
+
+
+	public Object getObject(Object obj) {
+		for (Object e : objectArray) {
+			if (e.getClass() == obj.getClass()) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+	public Object getObjectFromTopStack() {
+		for (int i = 0; i < objectArray.length; i++) {
+			if (objectArray[i] == null) {
+				System.out.println(objectArray[i - 1]);
+				return objectArray[i];
+			}
+		}
+		return false;
+	}
+
+	public Object getObjectWithRemove(Object obj) {
+		for (int i = 0; i < objectArray.length; i++) {
+			if (objectArray[i].getClass() == obj.getClass()) {
+				Object temp = objectArray[i];
+				removeObject(i);
+				return temp;
+			}
+		}
+		return null;
+	}
+
+	private void removeObject(int i) {
+		Object[] newArray = new Object[objectArray.length];
+		System.arraycopy(objectArray, 0, newArray, 0, i);
+		System.arraycopy(objectArray, i + 1, newArray, i, objectArray.length - i - 1);
+		objectArray = newArray;
+	}
+
+	public void printObjectArray() {
+		for (int i = 0; i < objectArray.length; i++) {
+			System.out.println("Object " + i + " " + objectArray[i]);
+		}
+	}
+
+	public Object[] getObjectArray() {
+		return objectArray;
+	}
+
+}
