@@ -34,12 +34,18 @@ public class Main {
 		MyStack stack = new MyStack(blackList);
 
 
-		stack.addWithCheckInBlackList(student);
-		stack.addWithCheckInBlackList(human);
-		stack.addWithCheckInBlackList(cat);
-		stack.addWithCheckInBlackList(student1);
-		stack.addWithCheckInBlackList(cat);
-		stack.addWithCheckInBlackList(student);
+		try {
+			stack.addWithCheckInBlackList(student);
+			stack.addWithCheckInBlackList(human);
+			stack.addWithCheckInBlackList(cat);
+			stack.addWithCheckInBlackList(student1);
+			stack.addWithCheckInBlackList(cat);
+			stack.addWithCheckInBlackList(student);
+			stack.addWithCheckInBlackList(student);
+		} catch (AdditionIsImpossible e) {
+			e.printStackTrace();
+		}
+
 
 		stack.printObjectArray();
 		System.out.println("------------------");

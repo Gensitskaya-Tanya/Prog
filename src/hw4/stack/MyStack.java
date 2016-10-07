@@ -11,9 +11,9 @@ public class MyStack {
 		this.blackList = blackList;
 	}
 
-	public void addWithCheckInBlackList(Object obj) {
+	public void addWithCheckInBlackList(Object obj) throws AdditionIsImpossible {
 		if (blackList.checkObjectInBlackList(obj)) {
-			System.out.println("!!! the addition _"+ obj.getClass() + "_ is impossible !!!");
+			throw new AdditionIsImpossible();
 		} else {
 			add(obj);
 		}
