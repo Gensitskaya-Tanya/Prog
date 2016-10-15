@@ -4,24 +4,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class FrequencyWords {
 
 	public void getFrequencyWords(String filePath) {
 		TreeMap<Character, Integer> treeMap = readFromFile(filePath);
-		TreeMap<Character, Double> treeMapRelativeFrequency = makeRelativeFrequency(treeMap);
-		ArrayList<CharObject> list = convertTreeMapToArrayList(treeMapRelativeFrequency);
+		ArrayList<CharObject> list = convertTreeMapToArrayList(treeMap);
 		Collections.sort(list);
 		printList(list);
 	}
 
 	private TreeMap<Character, Integer> readFromFile(String filePath) {
-		TreeMap<Character, Integer> treeMapSortKey = new TreeMap<>();
+		TreeMap<Character, Integer> treeMap = new TreeMap<>();
 		Character key;
 		Integer value = 1;
 		try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
@@ -29,36 +25,27 @@ public class FrequencyWords {
 			while ((c = reader.read()) != -1) {
 				if(64<c && c<123 ) {
 					key = (char) c;
-					if (!treeMapSortKey.containsKey(key)) {
-						treeMapSortKey.put(key, value);
+					if (!treeMap.containsKey(key)) {
+						treeMap.put(key, value);
 					} else {
-						Integer getValue = treeMapSortKey.get(key);
-						treeMapSortKey.put(key, getValue + 1);
+						Integer getValue = treeMap.get(key);
+						treeMap.put(key, getValue + 1);
 					}
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return treeMapSortKey;
+		return treeMap;
 	}
 
-	private TreeMap<Character, Double> makeRelativeFrequency(TreeMap<Character, Integer> treeMap) {
-		TreeMap<Character, Double> treeMapRelativeFrequency = new TreeMap<>();
-		for (Map.Entry<Character, Integer> e : treeMap.entrySet()) {
-			Character key = e.getKey();
-			Integer value = e.getValue();
-			Double newValue = 1.0 /value;
-			treeMapRelativeFrequency.put(key, newValue);
-		}
-		return treeMapRelativeFrequency;
-	}
 
-	private ArrayList<CharObject> convertTreeMapToArrayList(TreeMap<Character, Double> treeMap) {
+	private ArrayList<CharObject> convertTreeMapToArrayList(TreeMap<Character, Integer> treeMap) {
 		ArrayList<CharObject> list = new ArrayList<>();
 		for (Map.Entry entry : treeMap.entrySet()) {
 			Character key = (Character) entry.getKey();
-			Double value = (Double) entry.getValue();
+			int tempValue = (Integer) entry.getValue();
+			Double value = 1d/ tempValue;
 			CharObject charObject = new CharObject(key, value);
 			list.add(charObject);
 		}
