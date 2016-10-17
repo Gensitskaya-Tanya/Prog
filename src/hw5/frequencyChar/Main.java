@@ -8,7 +8,7 @@ package hw5.frequencyChar;
  */
 public class Main {
 	public static void main(String[] args) {
-		FrequencyWords fw = new FrequencyWords();
+		FrequencyChars fw = new FrequencyChars();
 		fw.getFrequencyWords("F:\\_Prog\\Prog\\src\\hw5\\words");
 	}
 }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class FrequencyWords {
+public class FrequencyChars {
 
 	public void getFrequencyWords(String filePath) {
 		TreeMap<Character, Integer> treeMap = readFromFile(filePath);
