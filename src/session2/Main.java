@@ -32,21 +32,21 @@ public class Main {
 //        for(int i=0; i<a.length || i<b.length || i<c.length; i++){
 //            try {
 //              sum = sum+1;
-//                int num = a[i];
+//                int num.txt = a[i];
 //            }
 //            catch (IndexOutOfBoundsException e){
 //
 //            }
 //            try {
 //                sum = sum+1;
-//                int num = b[i];
+//                int num.txt = b[i];
 //            }
 //            catch (IndexOutOfBoundsException e){
 //
 //            }
 //            try {
 //                sum = sum+1;
-//                int num = c[i];
+//                int num.txt = c[i];
 //            }
 //            catch (IndexOutOfBoundsException e){
 //

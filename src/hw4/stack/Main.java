@@ -23,6 +23,7 @@ import hw2.Student;
 public class Main {
 	public static void main(String[] args) {
 
+
 		Human human = new Human("human", "human", 1, 1, "human");
 		Student student = new Student("zb", "zb", 1, 2, "zb", "zb", 1, "zb");
 		Student student1 = new Student("zb1", "zb1", 1, 2, "zb1", "zb1", 1, "zb1");
