@@ -118,16 +118,16 @@ public class Dictionary {
 	}
 
 	public boolean addWordToDiCtionary(String englishWord, String translate, String filePathDictionary) throws WordAlreadyExistsException {
-		String str = "\n" +englishWord + " " + translate;
-		if(!dictionary.containsKey(englishWord)){
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePathDictionary, true))){
+		String str = "\n" + englishWord + " " + translate;
+		if (!dictionary.containsKey(englishWord)) {
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePathDictionary, true))) {
 				bw.write(str);
 				bw.flush();
-			}catch (IOException e){
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		 return true;
-		}else{
+			return true;
+		} else {
 			throw new WordAlreadyExistsException();
 		}
 	}

@@ -16,6 +16,6 @@ public class Main {
 	public static void main(String[] args) {
 		 AsciiArt asciiArt = new AsciiArt();
 		String filePath = "F:\\_Prog\\Prog\\src\\hw5\\ascii_art\\words_art";
-		asciiArt.changeFontToArt("ABC", filePath);
+		asciiArt.changeFontToArt("hello", filePath);
 	}
 }
